@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:uno_game/models/Player.dart';
 import '../util/env.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 import 'dart:convert';
-
-
 
 class PlayersController extends ChangeNotifier {
   PlayersController() {
@@ -63,5 +60,32 @@ class PlayersController extends ChangeNotifier {
 
     index();
     notifyListeners();
+  }
+
+  Future<void> delete(String playerId) async {
+  var url = Uri.https(Env.FIREBASE_URL, '/players/$playerId.json');
+
+    try{
+      await http.delete(url);
+      index();
+      notifyListeners();
+    } catch(e) {
+    }
+  }
+
+  Future<void> edit(String artistId, Player playerData) async {
+    var url = Uri.https(Env.FIREBASE_URL, '/artists/$artistId.json');
+
+    try {
+      await http.put(url, body: jsonEncode({
+        'name': playerData.name,
+        'email': playerData.email,
+        'password': playerData.password,
+        'contact': playerData.contact,
+      }));
+      index();
+      notifyListeners();
+    }catch(e) {
+    }
   }
 }

@@ -14,7 +14,7 @@ class GameController extends ChangeNotifier {
 
   List<Game> games = [];
 
-  Future<List<Game>> index(String id) async {
+  Future<void> index(String id) async {
     isLoading = true;
     games.clear();
 
@@ -36,8 +36,6 @@ class GameController extends ChangeNotifier {
         ));
       });
 
-      isLoading = false;
-      return games;
     } catch (error) {
       throw error;
     }
@@ -53,5 +51,32 @@ class GameController extends ChangeNotifier {
       }));
 
     notifyListeners();
+  }
+
+  Future<void> edit(String gameId, String playerId, Game gameData) async {
+    var url = Uri.https(Env.FIREBASE_URL, '/players/$playerId/games/$gameId.json');
+
+    try {
+      await http.put(url, body: jsonEncode({
+      'date': gameData.date,
+      'position': gameData.position,
+      'numPlayers': gameData.numPlayers
+      }));
+
+      index(playerId);
+      notifyListeners();
+    }catch(e) {
+    }
+  }
+
+  Future<void> delete(String playerId, String gameId) async {
+  var url = Uri.https(Env.FIREBASE_URL, '/players/$playerId/games/$gameId.json');
+
+    try{
+      await http.delete(url);
+      index(playerId);
+      notifyListeners();
+    } catch(e) {
+    }
   }
 }
