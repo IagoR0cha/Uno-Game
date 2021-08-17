@@ -26,8 +26,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              signInController.currentToken = '';
-              signInController.expirationDate = DateTime(0);
+              signInController.signOut();
 
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
                 return SignInPage();

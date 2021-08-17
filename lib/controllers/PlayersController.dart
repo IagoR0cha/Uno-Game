@@ -27,8 +27,6 @@ class PlayersController extends ChangeNotifier {
 
       var resp = await http.get(url);
 
-      print(resp.body);
-
       Map<String, dynamic> data =
           new Map<String, dynamic>.from(json.decode(resp.body));
 
