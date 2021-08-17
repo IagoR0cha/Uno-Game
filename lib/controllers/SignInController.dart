@@ -9,7 +9,8 @@ import '../../util/env.dart';
 
 class SignInController extends ChangeNotifier {
   SignInController() {
-    persistenceUser(new User(email: '', token: '', expirationDate: DateTime.now()));
+    persistenceUser(
+        new User(email: '', token: '', expirationDate: DateTime.now()));
   }
 
   DateTime expirationDate = DateTime.now();
@@ -29,25 +30,23 @@ class SignInController extends ChangeNotifier {
 
       final resp = await http.post(
         url,
-        body: json.encode({
-          "email": email,
-          "password": password,
-          "returnSecureToken": true
-        }),
+        body: json.encode(
+            {"email": email, "password": password, "returnSecureToken": true}),
       );
 
       final respAuth = json.decode(resp.body);
-     if (respAuth['error'] != null) {
-       throw Exception(respAuth['error']);
-     } else {
-       currentToken = respAuth['idToken'];
-       expirationDate = DateTime.now().add(Duration(seconds: int.parse(respAuth['expiresIn'])));
+      if (respAuth['error'] != null) {
+        throw Exception(respAuth['error']);
+      } else {
+        currentToken = respAuth['idToken'];
+        expirationDate = DateTime.now()
+            .add(Duration(seconds: int.parse(respAuth['expiresIn'])));
 
-       user = new User(email: email!, token: currentToken, expirationDate: expirationDate);
-       saveUserData(user);
-     }
-     notifyListeners();
-
+        user = new User(
+            email: email!, token: currentToken, expirationDate: expirationDate);
+        saveUserData(user);
+      }
+      notifyListeners();
     } catch (e) {
       print(e.toString());
       return null;
@@ -71,11 +70,12 @@ class SignInController extends ChangeNotifier {
       user = currentUser;
     }
 
-    if (prefs.getString('token') != null ) {
+    if (prefs.getString('token') != null) {
       user = User(
         email: prefs.getString('email')!,
         token: prefs.getString('token')!,
-        expirationDate: DateFormat("yyyy-MM-dd").parse(prefs.getString('expirationDate')!),
+        expirationDate: DateFormat("yyyy-MM-dd hh:mm:ss")
+            .parse(prefs.getString('expirationDate')!),
       );
 
       currentToken = user.token;

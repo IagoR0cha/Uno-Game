@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/signUpController.dart';
+import '../controllers/SignUpController.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpController signupController = SignUpController();
@@ -12,8 +12,9 @@ class SignUpPage extends StatelessWidget {
   String artistPassword = '';
   String artistName = '';
 
-  Future<void> submit(BuildContext context, SignUpController signupController) async {
-    await signupController.signUp( email: artistEmail, password: artistPassword);
+  Future<void> submit(
+      BuildContext context, SignUpController signupController) async {
+    await signupController.signUp(email: artistEmail, password: artistPassword);
 
     Navigator.of(context).pop();
   }
@@ -21,15 +22,15 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEEEEEE),
-      appBar: AppBar(
-        title: Text("Cadastrar"),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child:Container(
-          child: Form(
+        backgroundColor: Color(0xFFEEEEEE),
+        appBar: AppBar(
+          title: Text("Cadastrar"),
+          elevation: 0,
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+              child: Form(
             key: _formKey,
             child: Column(
               children: [
@@ -72,13 +73,10 @@ class SignUpPage extends StatelessWidget {
                             await submit(context, signupController);
                           }
                         },
-                        child: Text("Cadastrar")
-                  )),
+                        child: Text("Cadastrar"))),
               ],
             ),
-          )
-      ),
-      )
-    );
+          )),
+        ));
   }
 }

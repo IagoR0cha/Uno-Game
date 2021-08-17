@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:uno_game/Pages/SignUpPage.dart';
+import 'package:uno_game/pages/SignUpPage.dart';
 
 import '../controllers/SignInController.dart';
 
-import '../Pages/HomePage.dart';
-import '../Pages/SignUpPage.dart';
+import '../pages/HomePage.dart';
+import '../pages/SignUpPage.dart';
 
 class SignInPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -14,7 +14,8 @@ class SignInPage extends StatelessWidget {
   String? email;
   String? password;
 
-  Future<void> submit(BuildContext context, SignInController signInController) async {
+  Future<void> submit(
+      BuildContext context, SignInController signInController) async {
     try {
       await signInController.signIn(email: email, password: password);
 
@@ -23,10 +24,9 @@ class SignInPage extends StatelessWidget {
           return HomePage();
         }));
       }
-    }catch (e) {
+    } catch (e) {
       print(e);
     }
-
   }
 
   @override
@@ -84,15 +84,12 @@ class SignInPage extends StatelessWidget {
 
                           await submit(context, signInController);
                         },
-                        child: Text("Entrar")
-                  )),
+                        child: Text("Entrar"))),
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(
-                          builder: (context) =>  SignUpPage()
-                        ));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
                   },
                   child: Padding(
                       padding: const EdgeInsets.all(24),

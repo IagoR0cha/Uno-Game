@@ -4,7 +4,7 @@ import 'package:uno_game/controllers/GameConttroler.dart';
 import 'package:uno_game/controllers/PlayersController.dart';
 import 'package:uno_game/controllers/SignInController.dart';
 import 'package:uno_game/pages/SignInPage.dart';
-import 'package:uno_game/util/percistenceValidation.dart';
+import 'package:uno_game/util/PersistenceValidation.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,9 +35,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: PercistenceValidation(),
+        home: PersistenceValidation(),
       ),
     );
   }
 }
-
