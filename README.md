@@ -1,6 +1,6 @@
 # uno_game
 
-A new Flutter project.
+Integrantes do grupo: Iago Rocha, Paulo Henrique, Brener Batista, Wesley Elias
 
 ## Getting Started
 
