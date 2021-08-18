@@ -5,24 +5,20 @@ import 'package:uno_game/controllers/SignInController.dart';
 import '../pages/SignInPage.dart';
 import '../pages/HomePage.dart';
 
-class PercistenceValidation extends StatefulWidget {
-
+class PersistenceValidation extends StatefulWidget {
   @override
   Validated createState() => Validated();
 }
 
-class Validated extends State<PercistenceValidation> {
+class Validated extends State<PersistenceValidation> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<SignInController>(
-      builder: (_,login,__) {
-        if (login.hasAutenticated) {
-          return HomePage();
-        } else {
-          return SignInPage();
-        }
+    return Consumer<SignInController>(builder: (_, login, __) {
+      if (login.hasAutenticated) {
+        return HomePage();
+      } else {
+        return SignInPage();
       }
-    );
+    });
   }
-
 }
